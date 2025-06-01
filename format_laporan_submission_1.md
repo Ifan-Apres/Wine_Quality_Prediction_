@@ -122,6 +122,16 @@ Sedangkan AdaBoost dipilih karena sifatnya yang mampu meningkatkan akurasi secar
 
 
 ## Evaluation
-Pada proyek ini, metrik evaluasi yang digunakan adalah Mean Squared Error (MSE), yang sangat relevan untuk permasalahan regresi karena mengukur rata-rata dari kuadrat selisih antara nilai prediksi dan nilai aktual. MSE memberikan penalti yang lebih besar terhadap kesalahan yang ekstrem, sehingga efektif dalam menilai akurasi model secara keseluruhan. Tiga model regresi yang diuji adalah K-Nearest Neighbors (KNN), Random Forest (RF), dan AdaBoost Regressor. Berdasarkan hasil evaluasi, model Random Forest memiliki nilai MSE yang sangat kecil pada data latih (0.000092), tetapi meningkat cukup signifikan pada data uji (0.000535). Hal ini menunjukkan bahwa model cenderung mengalami overfitting, yaitu terlalu menyesuaikan diri terhadap data pelatihan dan kurang mampu menggeneralisasi ke data baru. Sebaliknya, model AdaBoost menunjukkan performa yang lebih stabil dengan MSE sebesar 0.000532 pada data latih dan 0.000526 pada data uji, menjadikannya model dengan performa terbaik dalam proyek ini. Sementara itu, model KNN mencatatkan MSE sebesar 0.000508 (train) dan 0.000595 (test), yang juga mengindikasikan sedikit overfitting. Secara keseluruhan, hasil evaluasi ini menunjukkan bahwa model AdaBoost lebih unggul dalam memberikan prediksi yang akurat dan konsisten terhadap kualitas anggur putih berdasarkan parameter fisikokimia.
+Pada proyek ini, metrik evaluasi yang digunakan adalah Mean Squared Error (MSE), yang sangat relevan untuk permasalahan regresi karena mengukur rata-rata dari kuadrat selisih antara nilai prediksi dan nilai aktual.
+![image](https://github.com/user-attachments/assets/d59d0e5d-f712-4c7d-890c-7aacb327f351)
+
+MSE memberikan penalti yang lebih besar terhadap kesalahan yang ekstrem, sehingga efektif dalam menilai akurasi model secara keseluruhan. Tiga model regresi yang diuji adalah K-Nearest Neighbors (KNN), Random Forest (RF), dan AdaBoost Regressor. 
+![image](https://github.com/user-attachments/assets/8f78e3ed-4bda-4fe9-944a-1f08e1ceeff4)
+![image](https://github.com/user-attachments/assets/1a5fff92-ca95-452e-b9c8-b0e604692570)
+
+Berdasarkan hasil evaluasi, model Random Forest memiliki nilai MSE yang sangat kecil pada data latih (0.000092), tetapi meningkat cukup signifikan pada data uji (0.000535). Hal ini menunjukkan bahwa model cenderung mengalami overfitting, yaitu terlalu menyesuaikan diri terhadap data pelatihan dan kurang mampu menggeneralisasi ke data baru. Sebaliknya, model AdaBoost menunjukkan performa yang lebih stabil dengan MSE sebesar 0.000532 pada data latih dan 0.000526 pada data uji, menjadikannya model dengan performa terbaik dalam proyek ini. Sementara itu, model KNN mencatatkan MSE sebesar 0.000508 (train) dan 0.000595 (test), yang juga mengindikasikan sedikit overfitting. 
+![image](https://github.com/user-attachments/assets/3e75ae90-96fa-49ce-ab27-1773ab7f1ade)
+
+Secara keseluruhan, hasil evaluasi ini menunjukkan bahwa model AdaBoost lebih unggul dalam memberikan prediksi yang akurat dan konsisten terhadap kualitas anggur putih berdasarkan parameter fisikokimia.
 
 
