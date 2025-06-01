@@ -10,14 +10,13 @@ Penilaian kualitas anggur secara tradisional mengandalkan uji sensorik yang bers
 
 ### Problem Statements
 
-Menjelaskan pernyataan masalah latar belakang:
 - Bagaimana cara memprediksi kualitas anggur secara objektif tanpa bergantung pada uji manual yang subjektif dan memakan waktu?
 - Apakah variabel-variabel fisikokimia seperti alkohol, pH, dan kadar asam memiliki hubungan signifikan terhadap skor kualitas anggur?
 - Model regresi apa yang paling efektif dalam memprediksi nilai kualitas anggur berdasarkan data yang tersedia?
 - Bagaimana perusahaan dapat meminimalkan kerugian akibat produk gagal atau kualitas rendah yang luput dari kontrol manual?
 ### Goals
 
-Menjelaskan tujuan dari pernyataan masalah:
+
 - Proyek ini bertujuan untuk mengembangkan model regresi yang mampu memprediksi skor kualitas anggur putih Vinho Verde berdasarkan data uji laboratorium terhadap sifat fisikokimia anggur, seperti kadar alkohol, keasaman, pH, dan kandungan sulfur. Dengan demikian, proses penilaian kualitas dapat dilakukan secara objektif, konsisten, dan otomatis tanpa harus bergantung pada panel uji sensorik manusia yang cenderung mahal, subjektif, dan sulit diulang secara identik. Dalam konteks bisnis, tujuan ini mendukung pengambilan keputusan berbasis data (data-driven decision making) dalam proses kontrol mutu dan efisiensi produksi
 -  Salah satu tujuan dari analisis eksplorasi data adalah untuk memahami hubungan masing-masing variabel fisikokimia terhadap skor kualitas anggur. Dengan mengidentifikasi variabel yang memiliki korelasi tinggi terhadap target (seperti alkohol yang memiliki korelasi sebesar 0.45), kita dapat mengarahkan fokus model pada fitur-fitur yang paling berpengaruh. Selain itu, pemahaman ini dapat digunakan untuk menyederhanakan proses produksi dan pengujian di industri dengan mengurangi pengukuran terhadap variabel-variabel yang memiliki pengaruh kecil, sehingga efisiensi biaya dan waktu dapat tercapai. Tujuan ini juga mendukung seleksi fitur dalam pembangunan model machine learning agar lebih ringan dan akurat.
 - Tujuan dari evaluasi ini adalah untuk membandingkan berbagai algoritma regresi dalam konteks akurasi prediksi kualitas anggur, agar dapat memilih model terbaik yang memberikan error prediksi paling rendah. Dengan menggunakan metrik evaluasi seperti Mean Squared Error (MSE), proyek ini bertujuan menemukan metode yang tidak hanya andal dalam prediksi tetapi juga cukup general (tidak overfitting). Hasil menunjukkan bahwa model seperti K-Nearest Neighbors (KNN) dan AdaBoost Regressor memiliki performa yang lebih baik dibanding Random Forest dalam konteks dataset ini. Pemilihan model yang optimal ini diharapkan mampu meningkatkan keandalan sistem prediksi kualitas untuk digunakan dalam proses kontrol kualitas otomatis di industri wine.
