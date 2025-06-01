@@ -98,6 +98,10 @@ Maka, ketiga fitur tersebut yang akan di reduksi menggunakan PCA. Didapat explai
 ![image](https://github.com/user-attachments/assets/28cb6893-6cba-4656-ae85-c4fb97048da9)
 Nilai PCA komponen satu memiliki nilai 0.99, hal ini mengartikan bahwa komponen tersebut akan menjelaskan ketiga fitur tadi menjadi 1 fitur. Setelah itu, komponen tersebut akan dimasukkan ke dataframe white_df dan akan dihapus ketiga fitur sebelumnya.
 
+Selanjutnya adalah splitting data, memisahkan data menjadi data latih dan data test dengan perbandingan 80:20. Pembagian data sebagai berikut:
+![image](https://github.com/user-attachments/assets/f4debfc0-bb74-40b8-b790-4c9b83902cf8)
+
+
 
 ## Modeling
 Dalam proyek ini, digunakan pendekatan regresi untuk memprediksi kualitas anggur putih berdasarkan data fisikokimia. Proses dimulai dengan membagi dataset menjadi data latih dan data uji menggunakan metode train_test_split dengan rasio 80:20. Berikut merupakan jumlah pembagian data latih dan data tes.
