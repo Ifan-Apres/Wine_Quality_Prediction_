@@ -58,20 +58,67 @@ Namun, setelah menggunakan .describe(), terdapat nilai 0 berjumlah 18 pada citri
 
 ![image](https://github.com/user-attachments/assets/768e6815-1cb5-4e47-8852-0394d11e06f7)
 
+Dalam dataset kualitas anggur putih ini, outlier merujuk pada sampel anggur yang memiliki karakteristik fisikokimia ekstrem yang sangat berbeda dari mayoritas data. Berikut merupakan outlier dari dataset white_df disajikan dalam bentuk bloxpot:
+![image](https://github.com/user-attachments/assets/46a6a920-5faf-4ac4-8b99-56f9515ec149)
+![image](https://github.com/user-attachments/assets/17e594f0-0e9c-4278-87f8-f5cb4dfff590)
+![image](https://github.com/user-attachments/assets/ee645891-0e6a-42df-bf8a-0a215a000d26)
+![image](https://github.com/user-attachments/assets/411ec29e-d935-45ab-8bbd-65943f5c7d0b)
+![image](https://github.com/user-attachments/assets/bddd1567-d3af-4433-bf9a-f572e60e99c9)
+![image](https://github.com/user-attachments/assets/6e8d1afc-323b-437c-a7aa-f69037dd6f5f)
 
+Selanjutnya, akan dilakukan penyajian analisis deskriptif dari dataset dalam bentuk histogram  dan correlation matrix dari fitur dalam dataset:
+
+![image](https://github.com/user-attachments/assets/4e7995dc-b4ef-439b-b2e1-3b02250d060e)
+Dalam gambar tersebut, didapat jumlah sampel berdasar nilai quality. Nilai quality 6 mengandung sampel terbanyak dan diikuti dengan quality 5 dan 7. Hal ini menunjukkan bahwa distribusi sampil banyak tersebar di kualitas anggur 6.
+
+![image](https://github.com/user-attachments/assets/759e4698-9060-47f1-94a9-bbf1490ee86d)
+Gambar diatas menunjukkan persebaran sample data dengan fitur dari dataset menggunakan histogram. Dalam gambar tersebut dapat dilihat bahwa fixed acidity, volatile acidity, citric acid, pH, free sulfur dioxide, total sulfur dioxide mempunyai persebaran distribusi normal.
+
+Terakhir, akan disajikan correlation matrix dari fitur numerik untuk menunjukkan hubungan antar fitur, correlation matrix sebagai berikut:
+
+![image](https://github.com/user-attachments/assets/32bfac42-1574-4f5f-ada2-3c9d85ee9b1e)
 
 
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+Tahapan data preparation dalam proyek ini mencakup beberapa langkah penting untuk memastikan kualitas data sebelum pemodelan. Pertama, dataset dibaca dan diperiksa untuk mengetahui struktur dan kelengkapan datanya. Tidak ditemukan nilai kosong, sehingga tidak diperlukan proses imputasi.
+Namun, dalam data understanding sebelumnya ditemukan duplikasi data sebanyak 937 data sehingga akan digunakan .drop_duplicates(inplace=True) untuk mengapus data duplikat tersebut.
+
+selanjutnya adalah menangani nilai 0 dalam citric acid yang berjumlah 18 data, untuk menangani hal tersebut, akan dilakukan penghapusan baris yang masih mempunyai nilai 0 dari fitur citric acid.
+
+Pada data undertanding, diketahui bahwa terdapat outlier dibeberapa fitur dalam dataset, untuk itu digunakan metode interquartile untuk menangani outlier tersebut.
+
+Dari matrix correlation yang terdapat dalam data understanding, didapat bahwa fitur sulphates, free sulfur dioxide dan citric acid mempunyai korelasi rendah dan fitur tersebut akan dihapus/drop karena tidak mempunyai hubungan kuat dnegan fitur quality.
+
+Selanjutnya, akan dilakukan feature selection menggunakan metode PCA untuk menyeleksi fitur yang berkolerasi tinggi satu sama lain. Didapat fitur residual sugar, total sulfur dioxide dan density mempunyai korelasi sedikit tinggi satu sama lain.
+
+![image](https://github.com/user-attachments/assets/f4f9659a-fa4a-4398-b189-2c3986b37972)
+
+Maka, ketiga fitur tersebut yang akan di reduksi menggunakan PCA. Didapat explained_variance_ratio_ array sebagai berikut:
+![image](https://github.com/user-attachments/assets/28cb6893-6cba-4656-ae85-c4fb97048da9)
+Nilai PCA komponen satu memiliki nilai 0.99, hal ini mengartikan bahwa komponen tersebut akan menjelaskan ketiga fitur tadi menjadi 1 fitur. Setelah itu, komponen tersebut akan dimasukkan ke dataframe white_df dan akan dihapus ketiga fitur sebelumnya.
 
 
 ## Modeling
-Dalam proyek ini, digunakan pendekatan regresi untuk memprediksi kualitas anggur putih berdasarkan data fisikokimia. Proses dimulai dengan membagi dataset menjadi data latih dan data uji menggunakan metode train_test_split dengan rasio 80:20. Karena skala antar fitur sangat bervariasi, dilakukan proses standardisasi menggunakan StandardScaler agar seluruh fitur berada pada skala yang sebanding, sehingga model dapat bekerja secara optimal.
+Dalam proyek ini, digunakan pendekatan regresi untuk memprediksi kualitas anggur putih berdasarkan data fisikokimia. Proses dimulai dengan membagi dataset menjadi data latih dan data uji menggunakan metode train_test_split dengan rasio 80:20. Berikut merupakan jumlah pembagian data latih dan data tes.
+![image](https://github.com/user-attachments/assets/49c07486-ee5a-42f5-a8af-124d89da9935)
 
-Tiga algoritma regresi digunakan dalam pemodelan ini, yaitu Random Forest Regressor, K-Nearest Neighbors (KNN) Regressor, dan AdaBoost Regressor. Random Forest digunakan sebagai baseline model karena kemampuannya dalam menangani data tabular dan menangkap hubungan nonlinier antar fitur. KNN digunakan untuk melihat performa model berbasis tetangga terdekat dengan parameter utama jumlah tetangga (n_neighbors=5). Sedangkan AdaBoost dipilih karena sifatnya yang mampu meningkatkan akurasi secara progresif dengan menggabungkan banyak model lemah.
 
-Evaluasi kinerja model dilakukan menggunakan Mean Squared Error (MSE), yaitu metrik yang mengukur rata-rata kesalahan kuadrat antara nilai prediksi dan nilai aktual. Model dengan nilai MSE paling rendah dianggap memiliki performa terbaik. Hasil evaluasi menunjukkan bahwa model KNN dan AdaBoost menghasilkan nilai MSE yang lebih rendah dibanding baseline model Random Forest, sehingga lebih tepat digunakan untuk memprediksi kualitas anggur dalam konteks data ini.
+Karena skala antar fitur sangat bervariasi, dilakukan proses standardisasi menggunakan StandardScaler agar seluruh fitur berada pada skala yang sebanding, sehingga model dapat bekerja secara optimal.
+![image](https://github.com/user-attachments/assets/82b27b7b-c38a-4b61-a231-dff7c94831a5)
+
+Tiga algoritma regresi digunakan dalam pemodelan ini, yaitu Random Forest Regressor, K-Nearest Neighbors (KNN) Regressor, dan AdaBoost Regressor. 
+![image](https://github.com/user-attachments/assets/77ad902d-ae71-4752-9425-e3fa09e462c4)
+
+Random Forest digunakan sebagai baseline model karena kemampuannya dalam menangani data tabular dan menangkap hubungan nonlinier antar fitur. Parameter yang digunakan dalam model ini yaitu n_estimators sebanyak 50 dan max_depth sebesar 16.
+![image](https://github.com/user-attachments/assets/2fd938a7-1888-43b6-a5de-b9b44fdef4d4)
+
+KNN digunakan untuk melihat performa model berbasis tetangga terdekat dengan parameter utama jumlah tetangga (n_neighbors=10).
+![image](https://github.com/user-attachments/assets/03d8cecb-0f47-4a7c-891d-4412ecd0889a)
+
+Sedangkan AdaBoost dipilih karena sifatnya yang mampu meningkatkan akurasi secara progresif dengan menggabungkan banyak model lemah. Parameter yang digunakan dalam model ini yaitu learning_rate sebesar 0.05.
+![image](https://github.com/user-attachments/assets/ca63ca85-36f3-4a48-a22c-261dc63d2b8d)
+
 
 
 ## Evaluation
