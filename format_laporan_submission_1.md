@@ -46,6 +46,20 @@ Dataset ini banyak digunakan untuk tugas regresi maupun klasifikasi, karena labe
 Berikut merupakan cuplikan isi dataset:
 ![image](https://github.com/user-attachments/assets/812b7373-37e3-4661-8424-cc85d31c40d4)
 
+Dalam data understanding ini, akan di cek data duplikasi menggunakan .duplicated().sum() sehingga didapat data duplikat sebanyak 937 yaitu sekitar 5% dari dataset.
+![image](https://github.com/user-attachments/assets/7ff6f986-4484-4ff8-9f34-7ce69150298d)
+
+
+Setelah itu, akan di cek missing value yang terkandung dalam dataset, ternyata dataset tersebut tidak terdapat missing value yang dapat dilihat sebagai berikut:
+
+![image](https://github.com/user-attachments/assets/fc2cf9d9-d330-4978-b735-52b3e60eaf50)
+Namun, setelah menggunakan .describe(), terdapat nilai 0 berjumlah 18 pada citric acid.
+![image](https://github.com/user-attachments/assets/f730eb2a-3391-47f3-bbf2-5a3478f6e690)
+
+![image](https://github.com/user-attachments/assets/768e6815-1cb5-4e47-8852-0394d11e06f7)
+
+
+
 
 
 ## Data Preparation
