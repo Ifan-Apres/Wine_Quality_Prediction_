@@ -42,6 +42,7 @@ Dataset ini banyak digunakan untuk tugas regresi maupun klasifikasi, karena labe
 - pH                      : Ukuran keasaman atau kebasaan anggur; pH yang terlalu tinggi atau rendah dapat memengaruhi rasa dan stabilitas.
 - sulphates               : Senyawa yang berfungsi sebagai pengawet dan agen antimikroba; berkontribusi pada rasa pahit jika berlebihan.
 - alcohol                 : Persentase kandungan alkohol dalam anggur; kadar alkohol umumnya mempengaruhi persepsi kualitas secara signifikan.
+
 Berikut merupakan cuplikan isi dataset:
 ![image](https://github.com/user-attachments/assets/812b7373-37e3-4661-8424-cc85d31c40d4)
 
