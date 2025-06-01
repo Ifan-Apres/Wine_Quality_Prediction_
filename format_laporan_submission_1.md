@@ -25,7 +25,7 @@ Menjelaskan tujuan dari pernyataan masalah:
 
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini adalah Wine Quality Dataset, yang berisi data mengenai kualitas anggur putih Vinho Verde dari Portugal berdasarkan hasil uji laboratorium terhadap sifat fisikokimia anggur. Dataset ini tersedia secara publik melalui [UCI Wine Quality Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Wine+Quality) dan bersumber dari penelitian oleh Cortez et al. (2009).
+Dataset yang digunakan dalam proyek ini adalah Wine Quality Dataset, yang berisi data mengenai kualitas anggur putih Vinho Verde dari Portugal berdasarkan hasil uji laboratorium terhadap sifat fisikokimia anggur. Dataset ini tersedia secara publik melalui [UCI Wine Quality Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Wine+Quality) dan bersumber dari penelitian oleh Cortez et al. (2009). Dataset berjumlah 4898 baris dan 12 fitur.
 
 Dataset ini banyak digunakan untuk tugas regresi maupun klasifikasi, karena label target berupa nilai kualitas yang dapat ditafsirkan sebagai kelas atau skor kontinu. Dalam proyek ini, pendekatan yang digunakan adalah regresi untuk memprediksi nilai kualitas anggur.
 
