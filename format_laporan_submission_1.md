@@ -52,7 +52,7 @@ Dalam data understanding ini, akan di cek data duplikasi menggunakan .duplicated
 Setelah itu, akan di cek missing value yang terkandung dalam dataset, ternyata dataset tersebut tidak terdapat missing value yang dapat dilihat sebagai berikut:
 
 ![image](https://github.com/user-attachments/assets/fc2cf9d9-d330-4978-b735-52b3e60eaf50)
-Namun, setelah menggunakan .describe(), terdapat nilai 0 berjumlah 18 pada citric acid.
+Namun, setelah menggunakan .describe(), terdapat nilai 0 berjumlah 19 pada citric acid.
 ![image](https://github.com/user-attachments/assets/f730eb2a-3391-47f3-bbf2-5a3478f6e690)
 
 ![image](https://github.com/user-attachments/assets/768e6815-1cb5-4e47-8852-0394d11e06f7)
@@ -98,26 +98,28 @@ Nilai PCA komponen satu memiliki nilai 0.99, hal ini mengartikan bahwa komponen 
 Selanjutnya adalah splitting data, memisahkan data menjadi data latih dan data test dengan perbandingan 80:20. Pembagian data sebagai berikut:
 ![image](https://github.com/user-attachments/assets/f4debfc0-bb74-40b8-b790-4c9b83902cf8)
 
-
-
-## Modeling
-Dalam proyek ini, digunakan pendekatan regresi untuk memprediksi kualitas anggur putih berdasarkan data fisikokimia. Proses dimulai dengan membagi dataset menjadi data latih dan data uji menggunakan metode train_test_split dengan rasio 80:20. Berikut merupakan jumlah pembagian data latih dan data tes.
-![image](https://github.com/user-attachments/assets/49c07486-ee5a-42f5-a8af-124d89da9935)
-
-
 Karena skala antar fitur sangat bervariasi, dilakukan proses standardisasi menggunakan StandardScaler agar seluruh fitur berada pada skala yang sebanding, sehingga model dapat bekerja secara optimal.
 ![image](https://github.com/user-attachments/assets/82b27b7b-c38a-4b61-a231-dff7c94831a5)
 
-Tiga algoritma regresi digunakan dalam pemodelan ini, yaitu Random Forest Regressor, K-Nearest Neighbors (KNN) Regressor, dan AdaBoost Regressor. 
+
+
+## Modeling
+Dalam proyek ini, digunakan pendekatan regresi untuk memprediksi kualitas anggur putih berdasarkan data fisikokimia. Tiga algoritma regresi digunakan dalam pemodelan ini, yaitu Random Forest Regressor, K-Nearest Neighbors (KNN) Regressor, dan AdaBoost Regressor. 
 ![image](https://github.com/user-attachments/assets/77ad902d-ae71-4752-9425-e3fa09e462c4)
 
-Random Forest digunakan sebagai baseline model karena kemampuannya dalam menangani data tabular dan menangkap hubungan nonlinier antar fitur. Parameter yang digunakan dalam model ini yaitu n_estimators sebanyak 50 dan max_depth sebesar 16.
+Random Forest digunakan sebagai salah satu model utama karena kemampuannya yang baik dalam menangani data tabular kompleks dan menangkap hubungan nonlinier antar fitur tanpa memerlukan asumsi distribusi data tertentu. Algoritma ini bekerja dengan membangun sejumlah besar decision trees (pohon keputusan) secara acak selama proses pelatihan. Setiap pohon dibangun dari sampel bootstrap data latih dan mempertimbangkan subset acak dari fitur pada setiap pemisahan. Untuk prediksi regresi, hasil dari setiap pohon individu kemudian dirata-ratakan untuk menghasilkan prediksi akhir. Pendekatan ansambel ini membantu mengurangi overfitting yang sering terjadi pada pohon keputusan tunggal dan meningkatkan robustisitas model.
+
+Parameter yang digunakan dalam model ini adalah n_estimators sebanyak 50, yang berarti 50 pohon keputusan dibangun, dan max_depth sebesar 16, yang membatasi kedalaman maksimum setiap pohon untuk mengontrol kompleksitas
 ![image](https://github.com/user-attachments/assets/2fd938a7-1888-43b6-a5de-b9b44fdef4d4)
 
-KNN digunakan untuk melihat performa model berbasis tetangga terdekat dengan parameter utama jumlah tetangga (n_neighbors=10).
+K-Nearest Neighbors (KNN) adalah algoritma pembelajaran berbasis instans yang sederhana namun seringkali efektif. Untuk prediksi regresi, KNN bekerja dengan mengidentifikasi 'k' titik data terdekat (tetangga) dari titik data baru dalam ruang fitur, berdasarkan metrik jarak tertentu (misalnya, jarak Euclidean). Nilai prediksi untuk titik data baru kemudian dihitung sebagai rata-rata (atau median) dari nilai target para 'k' tetangga terdekat tersebut. Performa KNN sangat bergantung pada pemilihan nilai 'k' dan metrik jarak yang sesuai.
+
+Dalam implementasi ini, parameter utama yang ditetapkan adalah jumlah tetangga n_neighbors=10
 ![image](https://github.com/user-attachments/assets/03d8cecb-0f47-4a7c-891d-4412ecd0889a)
 
-Sedangkan AdaBoost dipilih karena sifatnya yang mampu meningkatkan akurasi secara progresif dengan menggabungkan banyak model lemah. Parameter yang digunakan dalam model ini yaitu learning_rate sebesar 0.05.
+AdaBoost (Adaptive Boosting) Regressor dipilih karena merupakan salah satu algoritma boosting yang populer dan efektif. Algoritma ini bekerja dengan membangun model secara sekuensial, di mana setiap model berikutnya mencoba untuk memperbaiki kesalahan yang dibuat oleh model sebelumnya. Secara spesifik, AdaBoost menyesuaikan bobot dari instans data latih pada setiap iterasi. Instans yang salah diprediksi oleh model sebelumnya akan diberi bobot yang lebih tinggi, sehingga model berikutnya akan lebih fokus pada instans-instans yang sulit tersebut. Prediksi akhir merupakan kombinasi tertimbang dari prediksi semua model lemah yang telah dibangun.
+
+Parameter kunci yang digunakan adalah learning_rate sebesar 0.05, yang mengontrol kontribusi setiap model lemah terhadap ansambel akhir, membantu mencegah overfitting dengan membuat proses pembelajaran lebih bertahap.
 ![image](https://github.com/user-attachments/assets/ca63ca85-36f3-4a48-a22c-261dc63d2b8d)
 
 
@@ -135,7 +137,7 @@ Berdasarkan hasil evaluasi, model Random Forest memiliki nilai MSE yang sangat k
 
 1.  **Menjawab Problem Statement:**
     * **"Bagaimana cara memprediksi kualitas anggur secara objektif tanpa bergantung pada uji manual yang subjektif dan memakan waktu?"** Evaluasi ini menunjukkan bahwa model AdaBoost dengan MSE 0.000526 pada data uji mampu memberikan prediksi kualitas anggur secara objektif dan otomatis, menggantikan kebutuhan uji manual yang subjektif.
-    * **"Apakah variabel-variabel fisikokimia seperti alkohol, pH, dan kadar asam memiliki hubungan signifikan terhadap skor kualitas anggur?"** Meskipun ini lebih banyak digali pada EDA, keberhasilan model AdaBoost yang dilatih menggunakan variabel-variabel ini dalam mencapai MSE yang rendah mengkonfirmasi secara implisit bahwa variabel-variabel tersebut memang memiliki hubungan signifikan dan prediktif terhadap kualitas anggur.
+    * **"Apakah variabel-variabel fisikokimia seperti alkohol, pH, dan kadar asam memiliki hubungan signifikan terhadap skor kualitas anggur?"** Analisis korelasi (seperti yang terlihat pada Correlation Matrix) menunjukkan bahwa beberapa variabel fisikokimia memang memiliki hubungan dengan skor kualitas. Sebagai contoh, alkohol menunjukkan korelasi positif yang cukup terlihat dengan kualitas (koefisien sekitar 0.44), mengindikasikan bahwa kadar alkohol yang lebih tinggi cenderung berhubungan dengan kualitas yang lebih baik. Sebaliknya, density memiliki korelasi negatif sedang (sekitar -0.31), yang berarti semakin tinggi densitas, kualitas cenderung menurun. Variabel lain seperti pH menunjukkan korelasi positif yang lebih lemah (sekitar 0.1), sementara volatile acidity memiliki korelasi negatif lemah (sekitar -0.19). Keberhasilan model AdaBoost yang dilatih menggunakan keseluruhan set variabel fisikokimia ini dalam mencapai MSE yang rendah (0.000526 pada data uji) mengkonfirmasi secara praktis bahwa kombinasi variabel-variabel ini, dengan berbagai tingkat korelasi individualnya, secara kolektif signifikan dan prediktif terhadap kualitas anggur. Ini menunjukkan bahwa model mampu menangkap pola kompleks dari interaksi fitur-fitur tersebut, bahkan jika tidak semua fitur memiliki korelasi individual yang kuat.
     * **"Model regresi apa yang paling efektif dalam memprediksi nilai kualitas anggur berdasarkan data yang tersedia?"** Evaluasi ini secara langsung menjawab pertanyaan ini dengan mengidentifikasi AdaBoost Regressor sebagai model paling efektif dibandingkan KNN dan Random Forest, berdasarkan stabilitas dan akurasi (MSE rendah) pada data uji.
     * **"Bagaimana perusahaan dapat meminimalkan kerugian akibat produk gagal atau kualitas rendah yang luput dari kontrol manual?"** Dengan memilih dan mengimplementasikan model AdaBoost yang terbukti andal, perusahaan dapat meningkatkan akurasi deteksi kualitas rendah secara otomatis, sehingga meminimalkan produk gagal yang lolos ke pasar dan mengurangi kerugian terkait.
 
