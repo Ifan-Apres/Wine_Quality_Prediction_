@@ -30,8 +30,8 @@ Dataset ini banyak digunakan untuk tugas regresi maupun klasifikasi, karena labe
 
 
 ### Variabel-variabel pada  UCI Wine Quality dataset adalah sebagai berikut:
-- accepts                 : Kadar asam tetap (misalnya asam tartarat), yang berkontribusi pada rasa segar anggur.
-- cuisine                 : Kadar asam volatil (misalnya asam asetat), jumlah yang tinggi dapat menyebabkan rasa tidak enak (off-flavor).
+- fixed acidity           : Kadar asam tetap (misalnya asam tartarat), yang berkontribusi pada rasa segar anggur.
+- volatile acidity        : Kadar asam volatil (misalnya asam asetat), jumlah yang tinggi dapat menyebabkan rasa tidak enak (off-flavor).
 - citric acid             : Asam sitrat yang menambah kesegaran rasa; kadar rendah membuat anggur terasa lemah.
 - residual sugar          : Sisa gula setelah fermentasi; berkontribusi pada rasa manis dalam anggur
 - chlorides               : Konsentrasi garam, terutama natrium klorida, yang mempengaruhi rasa dan stabilitas anggur.
@@ -81,13 +81,11 @@ Terakhir, akan disajikan correlation matrix dari fitur numerik untuk menunjukkan
 
 ## Data Preparation
 Tahapan data preparation dalam proyek ini mencakup beberapa langkah penting untuk memastikan kualitas data sebelum pemodelan. Pertama, dataset dibaca dan diperiksa untuk mengetahui struktur dan kelengkapan datanya. Tidak ditemukan nilai kosong, sehingga tidak diperlukan proses imputasi.
-Namun, dalam data understanding sebelumnya ditemukan duplikasi data sebanyak 937 data sehingga akan digunakan .drop_duplicates(inplace=True) untuk mengapus data duplikat tersebut.
+Namun, dalam data understanding sebelumnya ditemukan duplikasi data sehingga  .drop_duplicates(inplace=True) untuk mengapus data duplikat tersebut.
 
-selanjutnya adalah menangani nilai 0 dalam citric acid yang berjumlah 18 data, untuk menangani hal tersebut, akan dilakukan penghapusan baris yang masih mempunyai nilai 0 dari fitur citric acid.
+selanjutnya adalah menangani nilai 0 dalam citric acid, tindakan yang dilakukan adalah akan diambil semua baris citric acid yang tidak mempunyai nilai 0.
 
 Pada data undertanding, diketahui bahwa terdapat outlier dibeberapa fitur dalam dataset, untuk itu digunakan metode interquartile untuk menangani outlier tersebut.
-
-Dari matrix correlation yang terdapat dalam data understanding, didapat bahwa fitur sulphates, free sulfur dioxide dan citric acid mempunyai korelasi rendah dan fitur tersebut akan dihapus/drop karena tidak mempunyai hubungan kuat dnegan fitur quality.
 
 Selanjutnya, akan dilakukan feature selection menggunakan metode PCA untuk menyeleksi fitur yang berkolerasi tinggi satu sama lain. Didapat fitur residual sugar, total sulfur dioxide dan density mempunyai korelasi sedikit tinggi satu sama lain.
 
